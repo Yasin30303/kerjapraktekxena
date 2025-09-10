@@ -1,10 +1,11 @@
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
-import { getServiceBySlug, getAllServiceSlugs } from '@/lib/services';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { getServiceBySlug, getAllServiceSlugs } from "@/lib/services";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 // Generate static params for SSG
 export async function generateStaticParams() {
@@ -12,7 +13,11 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
+export default function ServiceDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const service = getServiceBySlug(params.slug);
 
   if (!service) {
@@ -21,7 +26,10 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link href="/layanan" className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-8">
+      <Link
+        href="/layanan"
+        className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-8"
+      >
         <ArrowLeft className="h-4 w-4 mr-2" /> Kembali ke Layanan
       </Link>
 
@@ -37,14 +45,22 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
         <div>
           <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-          <p className="text-lg text-muted-foreground mb-6">{service.shortDescription}</p>
+          <p className="text-lg text-muted-foreground mb-6">
+            {service.shortDescription}
+          </p>
 
           <div className="prose max-w-none mb-8">
             {/* Render longDescription as HTML, be careful with untrusted content */}
-            <div dangerouslySetInnerHTML={{ __html: service.longDescription.replace(/\n/g, '<br/>') }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: service.longDescription.replace(/\n/g, "<br/>"),
+              }}
+            />
           </div>
 
-          <h2 className="text-2xl font-semibold mb-4">Manfaat yang Anda Dapatkan:</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Manfaat yang Anda Dapatkan:
+          </h2>
           <ul className="list-disc list-inside text-muted-foreground mb-8">
             {service.benefits.map((benefit, index) => (
               <li key={index}>{benefit}</li>
@@ -63,14 +79,19 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
               <h2 className="text-2xl font-semibold mb-4">Proyek Terkait:</h2>
               <div className="flex flex-wrap gap-2 mb-8">
                 {service.relatedProjects.map((projectSlug, index) => (
-                  <Badge key={index} variant="outline">{projectSlug}</Badge> // You might want to link to actual project pages here
+                  <Badge key={index} variant="outline">
+                    {projectSlug}
+                  </Badge> // You might want to link to actual project pages here
                 ))}
               </div>
             </>
           )}
 
           <Link href="/hubungi-kami">
-            <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700">
+            <Button
+              size="lg"
+              className="bg-blue-600 text-white hover:bg-blue-700"
+            >
               Dapatkan Penawaran
             </Button>
           </Link>

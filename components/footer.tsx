@@ -43,8 +43,8 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-4">Kontak</h4>
           <ul className="space-y-2 text-sm text-blue-200">
-            <li>+62 21 1234 5678</li>
-            <li>info@xenatekno.com</li>
+            <li>+62 838-2158-7222</li>
+            <li>xenatekno@gmail.com</li>
             <li>Bandung, Indonesia</li>
           </ul>
         </div>

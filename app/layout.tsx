@@ -1,20 +1,34 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import {Inter} from 'next/font/google'
+import type { Metadata } from "next";
+import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Inter } from "next/font/google";
+import Header from "@/components/header"; // Import Header
+import Footer from "@/components/footer"; // Import Footer
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
-}
-const InterFont = Inter({ subsets: ['latin'] })
+  title: "XENA TEKNO",
+  description: "Created with XENA",
+  generator: "XENA TEKNO",
+};
+
+const InterFont = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${InterFont.className}`}>
-      <body>{children}</body>
-    </html>
-  )
+    <ClerkProvider>
+      <html lang="en" className={`${InterFont.className}`}>
+        <body>
+          <div className="min-h-screen bg-white flex flex-col">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
+  );
 }
